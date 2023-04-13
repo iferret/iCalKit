@@ -8,9 +8,14 @@
 import Foundation
 import libical
 
-public struct Wrap<T>: Hashable where T: RawRepresentable<UInt32> {
+public struct Wrap<T>: Hashable, CustomStringConvertible where T: RawRepresentable<UInt32> {
     /// T
     internal let rawValue: T
+    
+    /// String
+    public var description: String {
+        return "\(rawValue)"
+    }
     
     /// hash
     /// - Parameter hasher: Hasher
@@ -26,10 +31,5 @@ public struct Wrap<T>: Hashable where T: RawRepresentable<UInt32> {
     public static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.hashValue == rhs.hashValue
     }
-}
-
-protocol icalValue {
-    associatedtype T
-    
     
 }
