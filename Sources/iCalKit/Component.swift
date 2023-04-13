@@ -29,6 +29,15 @@ public class Component: NSObject {
         return Property.Kind.allCases.reduce([], { $0 + icalcomponent_get_properties(from: rawValue, kind: $1.rawValue).map { .init(rawValue: $0) } })
     }
     
+    /// description
+    public override var description: String {
+        if let value = icalcomponent_as_ical_string_r(rawValue) {
+            return .init(cString: value)
+        } else {
+            return super.description
+        }
+    }
+    
     // MARK: 私有属性
     
     /// icalcomponent
@@ -95,7 +104,17 @@ extension Component {
     
     /// remove property
     /// - Parameter property: Property
-    internal func remove(_ property: Property) {
+    public func remove(_ property: Property) {
         icalcomponent_remove_property(rawValue, property.rawValue)
+    }
+    
+    /// toRFC5545
+    /// - Returns: String
+    public func toRFC5545() -> String {
+        if let value = icalcomponent_as_ical_string_r(rawValue) {
+            return .init(cString: value)
+        } else {
+            return ""
+        }
     }
 }

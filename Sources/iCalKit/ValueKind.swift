@@ -10,6 +10,18 @@ import libical
 
 public typealias ValueKind = Wrap<icalvalue_kind>
 extension ValueKind {
+    
+    /// String
+    public var label: String {
+        if let value = icalvalue_kind_to_string(rawValue) {
+            return .init(cString: value)
+        } else {
+            return "\(rawValue)"
+        }
+    }
+}
+
+extension ValueKind {
     /// ICAL_ANY_VALUE
     public static var ANY: ValueKind { .init(rawValue: ICAL_ANY_VALUE) }
     /// ICAL_ACTION_VALUE

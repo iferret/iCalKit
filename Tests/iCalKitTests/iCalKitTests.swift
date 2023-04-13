@@ -1,6 +1,5 @@
 import XCTest
 @testable import iCalKit
-import Foundation
 
 final class iCalKitTests: XCTestCase {
     func testExample() throws {
