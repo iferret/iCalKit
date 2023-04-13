@@ -5,7 +5,7 @@
 //  Created by iferret's on 2023/4/13.
 //
 
-import Cocoa
+import Foundation
 import libical
 
 public class Parameter: NSObject {
